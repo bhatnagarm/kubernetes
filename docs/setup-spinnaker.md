@@ -80,8 +80,8 @@ hal deploy apply
 
 #### Change the service type to either Load Balancer or NodePort
 ```
-kubectl -n spinnaker edit svc spin-deck
-kubectl -n spinnaker edit svc spin-gate
+kubectl -n spinnaker patch svc spin-deck --type='json' -p '[{"op":"replace","path":"/spec/type","value":"NodePort"}]' -p='[{"op": "add", "path": "/spec/ports/0/-", "value": {"nodePort": 32323}}]'
+kubectl -n spinnaker patch svc spin-gate --type='json' -p '[{"op":"replace","path":"/spec/type","value":"NodePort"}]' -p='[{"op": "add", "path": "/spec/ports/0/-", "value": {"nodePort": 32324}}]'
 ```
 
 #### Update config and redeploy
